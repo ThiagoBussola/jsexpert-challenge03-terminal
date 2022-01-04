@@ -3,13 +3,7 @@ import languageConfig from '../config/language.js';
 const defaultLanguage = languageConfig.default;
 
 class Income {
-  constructor({
-    position,
-    expectation,
-    conversion01,
-    conversion02,
-    conversion03,
-  }) {
+  constructor({ position, expectation, conversion01, conversion02, conversion03 }) {
     this.position = position;
     this.expectation = expectation || { currency: 'BRL', language: 'pt-BR' };
     this.conversion01 = conversion01 || { currency: 'USD', language: 'en-US' };
@@ -19,7 +13,7 @@ class Income {
 
   format() {
     return {
-      id: this.id,
+      id: Number(this.id),
       position: this.position,
       expectation: Income.formatCurrency(this.expectation),
       conversion01: Income.formatCurrency(this.conversion01),
@@ -31,8 +25,9 @@ class Income {
   static formatCurrency({ currency, value, language }) {
     const _language = language || defaultLanguage;
 
-    // TODO: Implement method
-    return null;
+    const formatedCurrency = Intl.NumberFormat(_language, {style: currency}).format(value)
+
+    return formatedCurrency;
   }
 }
 

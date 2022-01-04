@@ -1,9 +1,16 @@
 import chalk from 'chalk';
 
-// @TODO: Any guesses about what's missing?
+
+// TODO: criar um enum para as moedas?
 export default {
   table: {
     leftPad: 2,
-    columns: [],
+    columns: [
+      { field: "position", name: chalk.green("Position") },
+      { field: "expectation", name: chalk.blue("Expectation (BRL)") },
+      { field: "conversion01", name: chalk.green("USD") },
+      { field: "conversion02", name: chalk.purple("EUR") },
+      { field: "conversion03", name: chalk.red("RUB") }
+    ],
   },
 };

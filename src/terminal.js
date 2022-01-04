@@ -3,6 +3,7 @@ import chalkTable from 'chalk-table';
 import chalk from 'chalk';
 import readline from 'readline';
 import terminalConfig from './config/terminal.js';
+import terminal from './config/terminal.js';
 
 const TABLE_OPTIONS = terminalConfig.table;
 
@@ -13,9 +14,34 @@ class CustomTerminal {
   }
 
   initialize() {
-    // TODO: Initialize your terminal with the main instance
+    DraftLog(console).addLineListener(process.stdin)
+
+    // não precisa armazenar numa const terminal
+    this.terminal = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    })
+
+    this.initializeTable()
   }
-  // TODO: You'll need more methods down here as well, be creative
+
+  createTable() {
+    return chalkTable(TABLE_OPTIONS, this.data)
+  }
+  
+  initializeTable() {
+    this.print = console.draft(this.createTable())
+  }
+
+  question(msg = '') {
+    return new Promise(resolve => terminal.question(msg, resolve))
+  }
+
+  closeTerminal() {
+    this.terminal.close()
+  }
+
+  // update table
 }
 
 export default CustomTerminal;
