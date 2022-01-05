@@ -25,7 +25,7 @@ class Income {
   static formatCurrency({ currency, value, language }) {
     const _language = language || defaultLanguage;
 
-    const formatedCurrency = Intl.NumberFormat(_language, {style: currency}).format(value)
+    const formatedCurrency = new Intl.NumberFormat(_language, {style: 'currency', currency}).format(value)
 
     return formatedCurrency;
   }

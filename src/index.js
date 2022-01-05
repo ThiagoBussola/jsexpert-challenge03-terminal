@@ -13,9 +13,23 @@ const service = new IncomeService();
 async function mainLoop() {
   console.info('🚀 Running...\n');
   try {
-    // TODO: Looks like you have some work to do right here :)
+    const answer = await terminal.question('\n Qual seu cargo e pretenção salarial em BRL? (cargo; pretenção) \n ')
+
+    if(answer === VOCABULARY.STOP) {
+      terminal.closeTerminal()
+      console.log('Obrigado, volte sempre!')
+      return;
+    }
+
+    const income = await service.generateIncomeFromString(answer)
+    terminal.updateTable(income)
+
+    return mainLoop()
+
   } catch (error) {
     // TODO: Don't forget of handling some errors beautifully ;)
+    console.error('Erro', error)
+    // Assim como em aula, o sistema não pode sair do ar, então continua rodando
   }
   return mainLoop();
 }

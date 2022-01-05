@@ -3,7 +3,6 @@ import chalkTable from 'chalk-table';
 import chalk from 'chalk';
 import readline from 'readline';
 import terminalConfig from './config/terminal.js';
-import terminal from './config/terminal.js';
 
 const TABLE_OPTIONS = terminalConfig.table;
 
@@ -34,14 +33,18 @@ class CustomTerminal {
   }
 
   question(msg = '') {
-    return new Promise(resolve => terminal.question(msg, resolve))
+    return new Promise((resolve) => this.terminal.question(msg, resolve))
   }
 
   closeTerminal() {
+    // chamando a instancia do terminal para ser fechada
     this.terminal.close()
   }
 
-  // update table
+  updateTable(item) {
+    this.data.push(item)
+    this.print(chalkTable(TABLE_OPTIONS, this.data))
+  }
 }
 
 export default CustomTerminal;

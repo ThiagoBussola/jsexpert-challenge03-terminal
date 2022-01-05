@@ -8,9 +8,17 @@ class IncomeService {
 
   async generateIncomeFromString(incomeString, delimiter = ';') {
     const [position, expectation] = incomeString.split(delimiter);
-
-    // @TODO: Implement method
-    return null;
+    
+    const income = new Income({
+      position,
+      expectation: {
+        currency: 'BRL',
+        language: 'pt-BR',
+        value: +expectation
+      }
+    })
+    console.log(income)
+    return income;
   }
 }
 
