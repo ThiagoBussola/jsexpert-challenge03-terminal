@@ -1,5 +1,7 @@
 import IncomeRepository from './../repository/IncomeRepository.js';
 import Income from './../entity/Income.js';
+import EmptyString from './../exceptions/emptyString.js'
+import InvalidExpectation from './../exceptions/invalidExpectation.js'
 
 class IncomeService {
   constructor({ incomeRepository } = {}) {
@@ -7,16 +9,20 @@ class IncomeService {
   }
 
   async generateIncomeFromString(incomeString, delimiter = ';') {
+    
     const [position, expectation] = incomeString.split(delimiter);
+    
+    new EmptyString().invalidPosition(position)
+    new InvalidExpectation().invalidExpectation(expectation)
 
     const conversions = await this.incomeRepository.getConversions()
-    
+
     const income = new Income({
       position,
       expectation: {
         currency: 'BRL',
         language: 'pt-BR',
-        value: +expectation
+        value: Number(expectation)
       },
       conversion01: {
         currency: 'USD',

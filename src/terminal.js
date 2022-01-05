@@ -1,8 +1,8 @@
 import DraftLog from 'draftlog';
 import chalkTable from 'chalk-table';
-import chalk from 'chalk';
 import readline from 'readline';
 import terminalConfig from './config/terminal.js';
+import Income from './entity/Income.js';
 
 const TABLE_OPTIONS = terminalConfig.table;
 
@@ -40,8 +40,15 @@ class CustomTerminal {
   }
 
   updateTable(item) {
-    this.data.push(item)
-    this.print(this.createTable())
+    this.data.push(this.formatIncomeValue(item))
+  }
+
+  clearConsole() {
+    return console.clear()
+  }
+
+  formatIncomeValue(income) {
+    return new Income(income).format()
   }
 }
 
