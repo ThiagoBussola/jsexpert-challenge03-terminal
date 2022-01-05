@@ -14,8 +14,6 @@ class CustomTerminal {
 
   initialize() {
     DraftLog(console).addLineListener(process.stdin)
-
-    // não precisa armazenar numa const terminal
     this.terminal = readline.createInterface({
       input: process.stdin,
       output: process.stdout
@@ -43,7 +41,7 @@ class CustomTerminal {
 
   updateTable(item) {
     this.data.push(item)
-    this.print(chalkTable(TABLE_OPTIONS, this.data))
+    this.print(this.createTable())
   }
 }
 
