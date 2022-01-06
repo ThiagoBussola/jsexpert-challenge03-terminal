@@ -43,10 +43,6 @@ class CustomTerminal {
     this.data.push(this.formatIncomeValue(item))
   }
 
-  clearConsole() {
-    return console.clear()
-  }
-
   formatIncomeValue(income) {
     return new Income(income).format()
   }
