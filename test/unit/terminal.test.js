@@ -47,6 +47,13 @@ describe('Terminal suite tests', () => {
         terminal.initializeTable()
     })
 
+
+    // como deveria ser testado se está chamando a pergunta?
+    // it('must call question method', async () => {
+
+        
+    // })
+
     // não deu bom
     // it('must close the terminal', async () => {
     //     const spy = sinon.spy(terminal, terminal.close.name)
